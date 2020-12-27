@@ -1,7 +1,8 @@
 #include <StreamSpy.h>
 
 #ifndef DEBUG_PORT
-#define DEBUG_PORT Serial1
+//#define DEBUG_PORT Serial1
+#define DEBUG_PORT Serial
 #endif
 
 #ifndef EMONTX_PORT
