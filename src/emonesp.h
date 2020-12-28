@@ -63,7 +63,7 @@ void setTimeOffset();
 #endif
 
 #ifndef NODE_DESCRIPTION
-#define NODE_DESCRIPTION "WiFi EmonCMS Link"
+#define NODE_DESCRIPTION "WiFi smartIO-ESP Link"
 #endif
 
 #endif // _EMONESP_H

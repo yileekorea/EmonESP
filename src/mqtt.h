@@ -33,6 +33,8 @@
 #include <Arduino.h>
 #include <ArduinoJson.h>
 
+void mqtt_msg_callback(char *topic, byte *payload, unsigned int length);
+
 // -------------------------------------------------------------------
 // Perform the background MQTT operations. Must be called in the main
 // loop function

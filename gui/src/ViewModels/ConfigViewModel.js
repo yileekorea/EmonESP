@@ -1,7 +1,7 @@
 function ConfigViewModel() {
   BaseViewModel.call(this, {
-    "node_name": "emonESP",
-    "node_description":"WiFi Emoncms Link",
+    "node_name": "smartIO-ESP",
+    "node_description":"WiFi smartIO-ESP Link",
     "node_type": "",
     "ssid": "",
     "pass": "",
@@ -29,7 +29,7 @@ function ConfigViewModel() {
     "voltage_output":"",
     "time_offset":""
   }, baseEndpoint + "/config");
-  
+
   this.f_timer_start1 = ko.pureComputed({
       read: function () {
           return addcolon(this.timer_start1());
@@ -75,7 +75,7 @@ function ConfigViewModel() {
       },
       owner: this
   });
-  
+
 }
 ConfigViewModel.prototype = Object.create(BaseViewModel.prototype);
 ConfigViewModel.prototype.constructor = ConfigViewModel;
