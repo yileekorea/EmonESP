@@ -61,6 +61,8 @@ int i = 0;
 // -------------------------------------------------------------------
 void mqtt_msg_callback(char *topic, byte *payload, unsigned int length) {
 
+  espClient.setInsecure();
+
   String topicstr = String(topic);
   String payloadstr = String((char *)payload);
   payloadstr = payloadstr.substring(0,length);
@@ -148,6 +150,8 @@ void mqtt_msg_callback(char *topic, byte *payload, unsigned int length) {
 // -------------------------------------------------------------------
 boolean mqtt_connect()
 {
+  espClient.setInsecure();
+
   mqttclient.setServer(mqtt_server.c_str(), mqtt_port);
   mqttclient.setCallback(mqtt_msg_callback); //function to be called when mqtt msg is received on subscribed topic
 
