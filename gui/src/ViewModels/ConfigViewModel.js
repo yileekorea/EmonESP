@@ -1,7 +1,7 @@
 function ConfigViewModel() {
   BaseViewModel.call(this, {
-    "node_name": "smartIO-ESP",
-    "node_description":"WiFi smartIO-ESP Link",
+    "node_name": "444smartIO-ESP",
+    "node_description":"WiFi 555smartIO-ESP Link",
     "node_type": "",
     "ssid": "",
     "pass": "",
