@@ -84,7 +84,7 @@ void dumpRequest(AsyncWebServerRequest *request) {
                    (request->method() == HTTP_PUT) ? F("PUT") :
                    (request->method() == HTTP_PATCH) ? F("PATCH") :
                    (request->method() == HTTP_HEAD) ? F("HEAD") :
-                   (request->method() == HTTP_OPTIONS) ? F("OPTIONS") : 
+                   (request->method() == HTTP_OPTIONS) ? F("OPTIONS") :
                    F("UNKNOWN"));
   DEBUG_PORT.printf_P(PSTR(" http://%s%s\n"), request->host().c_str(), request->url().c_str());
 
@@ -329,7 +329,7 @@ handleSaveMqtt(AsyncWebServerRequest *request) {
                    request->arg(F("pass")));
 
   char tmpStr[200];
-  snprintf_P(tmpStr, sizeof(tmpStr), PSTR("Saved: %s %d %s %s %s %s"), mqtt_server.c_str(), port, 
+  snprintf_P(tmpStr, sizeof(tmpStr), PSTR("Saved: %s %d %s %s %s %s"), mqtt_server.c_str(), port,
           mqtt_topic.c_str(), mqtt_feed_prefix.c_str(), mqtt_user.c_str(), mqtt_pass.c_str());
   DBUGLN(tmpStr);
 
@@ -385,7 +385,7 @@ handleSaveTimer(AsyncWebServerRequest *request) {
   int qvoltage_output = tmp.toInt();
   tmp = request->arg(F("time_offset"));
   int qtime_offset = tmp.toInt();
-      
+
   config_save_timer(qtimer_start1, qtimer_stop1, qtimer_start2, qtimer_stop2, qvoltage_output, qtime_offset);
 
   mqtt_publish("out/timer",String(qtimer_start1)+" "+String(qtimer_stop1)+" "+String(qtimer_start2)+" "+String(qtimer_stop2)+" "+String(qvoltage_output));
@@ -882,9 +882,9 @@ void onEmonTxEvent(AsyncWebSocket * server, AsyncWebSocketClient *client, AwsEve
   }
 }
 
-void streamBuffer(StreamSpyReader &buffer, AsyncWebSocket &client) 
+void streamBuffer(StreamSpyReader &buffer, AsyncWebSocket &client)
 {
-  if(buffer.available() > 0 && client.availableForWriteAll()) 
+  if(buffer.available() > 0 && client.availableForWriteAll())
   {
     uint8_t *buf;
     size_t len;
@@ -979,6 +979,7 @@ web_server_loop() {
   if(apOffTime > 0 && millis() > apOffTime) {
     apOffTime = 0;
     wifi_turn_off_ap();
+    DEBUG.println(F("wifi_turn_off_ap..."));
   }
 
   // Do we need to restart the system?

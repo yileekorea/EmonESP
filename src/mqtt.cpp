@@ -43,8 +43,8 @@ String strID = String(WiFi.macAddress());
 //PubSubClient mqttclient(espClient);   // Create client for MQTT
 
 WiFiClientSecure espClient;             // Create client for MQTT
-//PubSubClient mqttclient(espClient);     // Create client for MQTT
-PubSubClient mqttclient(mqtt_server.c_str(), mqtt_port, mqtt_msg_callback, espClient);
+PubSubClient mqttclient(espClient);     // Create client for MQTT
+//PubSubClient mqttclient(mqtt_server.c_str(), mqtt_port, mqtt_msg_callback, espClient);
 
 static long nextMqttReconnectAttempt = 0;
 static unsigned long mqttRestartTime = 0;
@@ -61,7 +61,7 @@ int i = 0;
 // -------------------------------------------------------------------
 void mqtt_msg_callback(char *topic, byte *payload, unsigned int length) {
 
-//  espClient.setInsecure();
+  espClient.setInsecure();
 
   String topicstr = String(topic);
   String payloadstr = String((char *)payload);
@@ -150,7 +150,7 @@ void mqtt_msg_callback(char *topic, byte *payload, unsigned int length) {
 // -------------------------------------------------------------------
 boolean mqtt_connect()
 {
-//  espClient.setInsecure();
+  espClient.setInsecure();
 
   mqttclient.setServer(mqtt_server.c_str(), mqtt_port);
   mqttclient.setCallback(mqtt_msg_callback); //function to be called when mqtt msg is received on subscribed topic

@@ -62,13 +62,13 @@ void setup() {
 
   DBUG("Node type: ");
   DBUGLN(node_type);
-  
+
   // Read saved settings from the config
   config_load_settings();
   DBUGF("After config_load_settings: %d", ESP.getFreeHeap());
 
   timeClient.setTimeOffset(time_offset);
-  
+
   DBUG("Node name: ");
   DBUGLN(node_name);
 
@@ -85,7 +85,7 @@ void setup() {
   pinMode(4, OUTPUT);
   #endif
   // ---------------------------------------------------------
-  
+
   // Initial LED on
   led_flash(3000, 100);
 
@@ -95,7 +95,7 @@ void setup() {
   led_flash(50, 50);
 
   // Bring up the web server
-  web_server_setup();
+//  web_server_setup();
   DBUGF("After web_server_setup: %d", ESP.getFreeHeap());
   led_flash(50, 50);
 
@@ -110,7 +110,7 @@ void setup() {
   // Time
   timeClient.begin();
   DBUGF("After timeClient.begin: %d", ESP.getFreeHeap());
-  
+
   delay(100);
 
   start_mem = last_mem = ESP.getFreeHeap();
@@ -167,12 +167,12 @@ void loop()
 
     // 1. Timer
     int timenow = timeClient.getHours()*100+timeClient.getMinutes();
-    
+
     if (timer_stop1>=timer_start1 && (timenow>=timer_start1 && timenow<timer_stop1)) ctrl_state = 1;
     if (timer_stop2>=timer_start2 && (timenow>=timer_start2 && timenow<timer_stop2)) ctrl_state = 1;
 
     if (timer_stop1<timer_start1 && (timenow>=timer_start1 || timenow<timer_stop1)) ctrl_state = 1;
-    if (timer_stop2<timer_start2 && (timenow>=timer_start2 || timenow<timer_stop2)) ctrl_state = 1;    
+    if (timer_stop2<timer_start2 && (timenow>=timer_start2 || timenow<timer_stop2)) ctrl_state = 1;
 
     // 2. On/Off
     if (ctrl_mode=="On") ctrl_state = 1;
@@ -196,7 +196,7 @@ void loop()
 
     last_pushbtn_state = pushbtn_state;
     pushbtn_state = !digitalRead(0);
-    
+
     if (pushbtn_state && last_pushbtn_state && !pushbtn_action) {
       pushbtn_action = 1;
       if (ctrl_mode=="On") ctrl_mode = "Off"; else ctrl_mode = "On";
@@ -205,7 +205,7 @@ void loop()
     }
     if (!pushbtn_state && !last_pushbtn_state) pushbtn_action = 0;
   }
-  
+
 } // end loop
 
 String getTime() {

@@ -26,6 +26,7 @@
 #include "emonesp.h"
 #include "wifi.h"
 #include "app_config.h"
+#include "web_server.h"
 #include <ESP8266WiFi.h>              // Connect to Wifi
 #include <ESP8266mDNS.h>              // Resolve URL for update server etc.
 #include <DNSServer.h>                // Required for captive portal
@@ -120,7 +121,7 @@ startAP() {
   DEBUG.print(F("AP IP Address: "));
   DEBUG.println(tmpStr);
   ipaddress = tmpStr;
-    
+
   apClients = 0;
 }
 
@@ -134,7 +135,7 @@ startClient()
   DEBUG.println(esid.c_str());
   //DEBUG.print(F(" PSK:"));
   //DEBUG.println(epass.c_str());
-  
+
   client_disconnects = 0;
 
   WiFi.begin(esid.c_str(), epass.c_str());
@@ -151,7 +152,7 @@ static void wifi_start()
     startAP();
   }
   // 2) else try and connect to the configured network
-  else 
+  else
   {
     startClient();
   }
@@ -262,7 +263,7 @@ wifi_setup() {
   wifi_start();
 }
 
-void wifi_loop() 
+void wifi_loop()
 {
   Profile_Start(wifi_loop);
 
@@ -309,7 +310,10 @@ void wifi_loop()
     } else {
       DBUGF("Button released");
       if(millis() > wifiButtonTimeOut + WIFI_BUTTON_AP_TIMEOUT) {
+        DBUGF("startAP......");
         startAP();
+        web_server_setup();
+
       }
     }
   }

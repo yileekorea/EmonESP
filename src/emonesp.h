@@ -63,7 +63,7 @@ void setTimeOffset();
 #endif
 
 #ifndef NODE_DESCRIPTION
-#define NODE_DESCRIPTION "WiFi 777smartIO-ESP Link"
+#define NODE_DESCRIPTION "WiFi 77smartIO-ESP Link"
 #endif
 
 #endif // _EMONESP_H
